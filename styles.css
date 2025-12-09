@@ -361,6 +361,10 @@ textarea {
   color: #fff;
   margin: 0 0 0 0;
   box-shadow: 0 2px 8px rgba(0,0,0,.1);
+  /* Kunci untuk membuat header fixed/sticky */
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .main-header h3 {
@@ -582,54 +586,84 @@ textarea {
   vertical-align: middle;
 }
 
-/* REVISI: Kontrol Lebar dan Ukuran Font di Tabel Rekap */
+/* REVISI GLOBAL UNTUK KELAS .rekap */
 .table.rekap th,
 .table.rekap td {
-  /* Atur padding dan font-size dasar di tabel rekap */
-  padding: 6px 8px; /* Padding lebih kecil */
-  font-size: 0.8rem; /* Ukuran font lebih kecil */
+  /* [AFTER] Menggunakan padding sangat kecil dan font 0.75rem */
+  padding: 4px 6px; /* Padding lebih kecil lagi */
+  font-size: 0.75rem; /* Ukuran font lebih kecil untuk kerapatan */
   vertical-align: middle;
   white-space: nowrap;
+  line-height: 1.2; /* Kerapatan baris */
 }
 
-/* 1. PERLEBAR KOLOM DN */
-.table.rekap th:nth-child(2), /* Kolom DN */
+/* 1. KONTROL LEBAR KOLOM UMUM */
+.table.rekap th:nth-child(1), /* No */
+.table.rekap td:nth-child(1) {
+  min-width: 30px;
+}
+.table.rekap th:nth-child(2), /* DN */
 .table.rekap td:nth-child(2) {
-  min-width: 150px; /* Diperbesar agar 15 karakter terlihat */
+  min-width: 120px; /* Cukup untuk dua DN Combo */
 }
-/* 2. KONTROL LEBAR KOLOM DI SEBELAH KANAN (Container - Aksi) */
-
-/* Kolom Container */
-.table.rekap th:nth-child(11),
-.table.rekap td:nth-child(11) {
-  min-width: 65px; /* Perkecil Container */
+.table.rekap th:nth-child(3), /* EMKL */
+.table.rekap td:nth-child(3) {
+  min-width: 100px; /* Diperkecil dari 140px */
 }
-/* Kolom Jumlah */
-.table.rekap th:nth-child(12),
-.table.rekap td:nth-child(12) {
-  min-width: 50px; /* Perkecil Jumlah */
+.table.rekap th:nth-child(4), /* Tanggal Stuffing */
+.table.rekap td:nth-child(4) {
+  min-width: 80px;
 }
-/* Kolom Remarks */
-.table.rekap th:nth-child(13),
-.table.rekap td:nth-child(13) {
+.table.rekap th:nth-child(5), /* Shipping Point */
+.table.rekap td:nth-child(5) {
+  min-width: 80px;
+}
+.table.rekap th:nth-child(6), /* Destination Port */
+.table.rekap td:nth-child(6) {
   min-width: 90px;
 }
-/* Kolom Status (Accept/Reject) */
-.table.rekap th:nth-child(14),
-.table.rekap td:nth-child(14),
-.table.rekap th:nth-child(15),
-.table.rekap td:nth-child(15) {
-  min-width: 45px; /* Perkecil Status Accept/Reject */
-  font-size: 0.75rem; /* Perkecil font status */
-  padding: 4px;
+.table.rekap th:nth-child(7), /* Terminal */
+.table.rekap td:nth-child(7) {
+  min-width: 60px;
+}
+.table.rekap th:nth-child(8), /* Depo */
+.table.rekap td:nth-child(8) {
+  min-width: 70px;
+}
+.table.rekap th:nth-child(9), /* Open CY */
+.table.rekap td:nth-child(9) {
+  min-width: 70px;
+}
+.table.rekap th:nth-child(10), /* Closing (Date Time) */
+.table.rekap td:nth-child(10) {
+  min-width: 120px; /* Cukup untuk tanggal + jam */
+}
+.table.rekap th:nth-child(11), /* Container */
+.table.rekap td:nth-child(11) {
+  min-width: 50px;
+}
+.table.rekap th:nth-child(12), /* Jumlah */
+.table.rekap td:nth-child(12) {
+  min-width: 40px;
+}
+.table.rekap th:nth-child(13), /* Remarks */
+.table.rekap td:nth-child(13) {
+  min-width: 80px;
+  white-space: normal; /* Biarkan remarks wrapping */
 }
 
-/* REVISI: Menyamakan lebar kolom Accept dan Reject di Rekap List Orderan (Order to EMKL) */
+/* 2. KONTROL LEBAR KOLOM STATUS DAN AKSI */
+/* Kolom Status (Accept/Reject) - Dibuat sama dan presisi */
 .table.rekap th.acc,
 .table.rekap td.acc,
 .table.rekap th.rej,
 .table.rekap td.rej {
-    min-width: 65px; /* Lebar yang sama */
+    /* MENGEKECILKAN LEBAR MINIMAL KOLOM STATUS */
+    min-width: 40px; /* Lebar minimal yang sangat kecil */
+    font-size: 0.7rem; 
+    box-sizing: border-box; 
+    /* Hapus padding ekstra di sel data */
+    padding: 0px !important; 
 }
 
 /* Kolom Attach File (BC/SI) */
@@ -637,62 +671,34 @@ textarea {
 .table.rekap td:nth-child(16),
 .table.rekap th:nth-child(17), 
 .table.rekap td:nth-child(17) {
-  min-width: 50px; /* Perkecil BC/SI */
+  min-width: 45px;
 }
-
 /* Kolom Email */
 .table.rekap th:nth-child(18), 
 .table.rekap td:nth-child(18) {
-  min-width: 60px; /* Perkecil Email */
+  min-width: 45px;
 }
-
 /* Kolom Aksi */
 .table.rekap th:nth-child(19), 
 .table.rekap td:nth-child(19) {
-  min-width: 65px; /* Perkecil Aksi */
+  min-width: 60px;
 }
 
 /* KONTROL UKURAN TOMBOL DI KOLOM AKSI */
 .table.rekap td button {
-    font-size: 0.7rem !important; /* Perkecil font tombol */
-    padding: 4px 8px !important; 
+    font-size: 0.65rem !important; /* Perkecil font tombol */
+    padding: 3px 6px !important; 
     line-height: 1; 
-}
-.table.rekap th:nth-child(3), /* Kolom EMKL */
-.table.rekap td:nth-child(3) {
-  min-width: 140px;
-}
-.table.rekap th:nth-child(5), /* Shipping Point */
-.table.rekap td:nth-child(5) {
-  min-width: 100px;
-}
-.table.rekap th:nth-child(6), /* Destination Port */
-.table.rekap td:nth-child(6) {
-  min-width: 120px;
-}
-.table.rekap th:nth-child(7), /* Terminal */
-.table.rekap td:nth-child(7) {
-  min-width: 90px;
-}
-.table.rekap th:nth-child(8), /* Depo */
-.table.rekap td:nth-child(8) {
-  min-width: 90px;
-}
-/* Kolom CY Closing (Date Time) */
-.table.rekap th:nth-child(10),
-.table.rekap td:nth-child(10) {
-  min-width: 150px;
 }
 
 /* REVISI KHUSUS: Mengatur tampilan input di dalam mode edit Admin Rekap */
 #rekapTable input,
 #rekapTable select {
+    padding: 4px;
+    font-size: 0.75rem;
     width: 100%;
     box-sizing: border-box;
-    padding: 6px;
-    font-size: 0.8rem;
     height: auto;
-    /* Hilangkan margin agar pas di dalam sel */
     margin: 0; 
     text-align: center;
 }
@@ -701,11 +707,11 @@ textarea {
 }
 /* Memastikan textarea DN pas di dalam sel */
 #rekapTable textarea {
-    min-height: 4.5em; /* Tinggi yang cukup untuk 2-3 DN */
-    padding: 6px;
-    font-size: 0.8rem;
+    min-height: 4em; /* Tinggi yang cukup untuk 2-3 DN */
+    padding: 4px;
+    font-size: 0.75rem;
+    line-height: 1.1;
     resize: none;
-    line-height: 1.2;
     margin: 0;
 }
 
@@ -1065,13 +1071,13 @@ body.sidebar-collapsed .submenu-container {
   display: none;
 }
 
-/* === NOTIFICATION BELL === */
+/* === NOTIFICATION BELL (REVISI 3: Fixed in top right corner) === */
 .notification-bell {
-  position: fixed;
+  position: fixed; /* Kunci: Menggunakan fixed agar tidak bergerak saat scroll */
   top: 24px;
   right: 24px;
   cursor: pointer;
-  z-index: 999999;
+  z-index: 1000; /* Z-index lebih rendah dari modal, tapi lebih tinggi dari content lain */
   width: 44px;
   height: 44px;
   background: #fff;
@@ -1108,7 +1114,7 @@ body.sidebar-collapsed .submenu-container {
 }
 
 .notification-content {
-  position: absolute;
+  position: absolute; /* Tetap absolute terhadap parent .notification-bell yang fixed */
   top: 54px;
   right: 0;
   width: 320px;
@@ -1125,20 +1131,13 @@ body.sidebar-collapsed .submenu-container {
   border: 1px solid var(--border);
   max-height: 400px;
   overflow-y: auto;
+  z-index: 999; /* Pastikan content di atas main content */
 }
 
 .notification-content.show {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
-}
-
-.notification-content h4 {
-  margin: 0 0 10px 0;
-  font-size: 1rem;
-  color: var(--blue-2);
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border);
 }
 
 .notification-item {
@@ -1159,10 +1158,9 @@ body.sidebar-collapsed .submenu-container {
 }
 
 .notification-item .message {
-  font-weight: 500;
+  /* Font weight diatur di app.js untuk bold/normal */
   display: block;
   margin-bottom: 4px;
-  /* Font weight ditentukan di app.js */
 }
 
 .notification-item .time {
@@ -1170,6 +1168,7 @@ body.sidebar-collapsed .submenu-container {
   font-size: 0.75rem;
   color: var(--muted);
 }
+/* === AKHIR REVISI 3: NOTIFICATION BELL === */
 
 /* === REPORT DURASI === */
 #report-durasi-page {
@@ -1423,250 +1422,272 @@ body.sidebar-collapsed .submenu-container {
 }
 
 /* === LOGIN PAGE === */
+/* KODE LOGIN PAGE DI BAWAH INI DIAMBIL DARI CSS YANG ANDA SEDIAKAN DI PROMPT */
+
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
 body.login-page * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body.login-page {
-  background: #f6f5f7;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  font-family: 'Montserrat', sans-serif;
-  height: 100vh;
-  margin: 0;
-  overflow: hidden;
+    background: #f6f5f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+    height: 100vh;
+    margin: 0; /* Hapus margin negatif */
+    overflow: hidden; /* Sembunyikan scroll di halaman login */
 }
 
+/* Override #app dan #content agar fullscreen */
 body.login-page #app {
-  display: block;
-  grid-template-columns: 1fr;
-  min-height: 100vh;
-  width: 100vw;
+    display: block;
+    grid-template-columns: 1fr;
+    min-height: 100vh;
+    width: 100vw;
+}
+body.login-page main#content {
+    display: flex; /* <-- KUNCI UTAMA */
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    overflow: hidden;
+    height: 100vh;
 }
 
-body.login-page main#content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-  overflow: hidden;
-  height: 100vh;
-}
 
 body.login-page h1 {
-  font-weight: bold;
-  margin: 0;
-}
-
-body.login-page h2 {
-  font-weight: 800;
-  font-size: 1.8rem;
-  margin: 4px 0 8px 0;
-  color: #3498db;
-}
-
-body.login-page .overlay-panel h2 {
-  color: #FFFFFF;
-  font-weight: 800;
-  font-size: 2.2rem;
-  margin-bottom: 8px;
+    font-weight: bold;
+    margin: 0;
 }
 
 body.login-page p {
-  font-size: 14px;
-  font-weight: 100;
-  line-height: 20px;
-  letter-spacing: 0.5px;
-  margin: 20px 0 30px;
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    margin: 20px 0 30px;
 }
 
 body.login-page span {
-  font-size: 12px;
+    font-size: 12px;
 }
 
 body.login-page a {
-  color: #333;
-  font-size: 14px;
-  text-decoration: none;
-  margin: 15px 0;
+    color: #333;
+    font-size: 14px;
+    text-decoration: none;
+    margin: 15px 0;
 }
 
+/* === GRADASI BARU (BIRU "SEDANG") DI TOMBOL === */
 body.login-page button {
-  border-radius: 20px;
-  border: none;
-  background: linear-gradient(to right, #2c3e50, #3498db);
-  color: #FFFFFF;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 12px 45px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  transition: transform 80ms ease-in;
-  cursor: pointer;
+    border-radius: 20px;
+    border: none; 
+    /* GRADASI BARU: #2c3e50 ke #3498db */
+    background: linear-gradient(to right, #2c3e50, #3498db); 
+    
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+    cursor: pointer;
 }
+/* === AKHIR PERUBAHAN === */
+
 
 body.login-page button:active {
-  transform: scale(0.95);
+    transform: scale(0.95);
 }
 
 body.login-page button:focus {
-  outline: none;
+    outline: none;
 }
 
 body.login-page button.ghost {
-  background: transparent;
-  border: 1px solid #FFFFFF;
+    background: transparent;
+    border: 1px solid #FFFFFF;
 }
 
+
 body.login-page form {
-  background-color: #FFFFFF;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 0 50px;
-  height: 100%;
-  text-align: center;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 50px;
+    height: 100%;
+    text-align: center;
 }
 
 body.login-page input {
-  background-color: #eee;
-  border: none;
-  padding: 12px 15px;
-  margin: 8px 0;
-  width: 100%;
-  border-radius: 0;
-  font-family: 'Montserrat', sans-serif;
+    /* override .input global */
+    background-color: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+    border-radius: 0; /* Hapus border-radius dari .input global */
+    font-family: 'Montserrat', sans-serif;
 }
 
 body.login-page .container {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-  position: relative;
-  overflow: hidden;
-  width: 768px;
-  max-width: 100%;
-  min-height: 480px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    position: relative;
+    overflow: hidden; 
+    width: 768px;
+    max-width: 100%;
+    min-height: 480px;
 }
 
 body.login-page .form-container {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  transition: all 0.6s ease-in-out;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
 }
 
+/* Form Sign In (Vendor) ada di KIRI */
 body.login-page .sign-in-container {
-  left: 0;
-  width: 50%;
-  z-index: 2;
+    left: 0;
+    width: 50%;
+    z-index: 2;
 }
 
+/* Form Sign Up (Admin) tersembunyi */
 body.login-page .sign-up-container {
-  left: 0;
-  width: 50%;
-  opacity: 0;
-  z-index: 1;
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
 }
 
+/* Container Overlay ada di KANAN */
 body.login-page .overlay-container {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 50%;
-  height: 100%;
-  overflow: hidden;
-  transition: transform 0.6s ease-in-out;
-  z-index: 100;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden; 
+    transition: transform 0.6s ease-in-out;
+    z-index: 100;
 }
 
+/* === GRADASI BARU (BIRU "SEDANG") DI OVERLAY === */
 body.login-page .overlay {
-  background: #2c3e50;
-  background: -webkit-linear-gradient(to right, #2c3e50, #3498db);
-  background: linear-gradient(to right, #2c3e50, #3498db);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 0 0;
-  color: #FFFFFF;
-  position: relative;
-  left: -100%;
-  height: 100%;
-  width: 200%;
-  transform: translateX(0);
-  transition: transform 0.6s ease-in-out;
+    /* GRADASI BARU: #2c3e50 ke #3498db */
+    background: #2c3e50; /* Fallback */
+    background: -webkit-linear-gradient(to right, #2c3e50, #3498db);
+    background: linear-gradient(to right, #2c3e50, #3498db);
+    
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 0;
+    color: #FFFFFF;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
 }
+/* === AKHIR PERUBAHAN === */
 
+
+/* KUNCI LENGKUNGANNYA */
 body.login-page .overlay-container {
-  border-radius: 100px 0 0 100px;
+    border-radius: 100px 0 0 100px;
 }
-
 body.login-page .overlay {
-  border-radius: 100px 0 0 100px;
+    border-radius: 100px 0 0 100px;
 }
-
 body.login-page .container.right-panel-active .overlay-container {
-  border-radius: 0 100px 100px 0;
+    border-radius: 0 100px 100px 0;
+}
+body.login-page .container.right-panel-active .overlay {
+    border-radius: 0 100px 100px 0;
 }
 
-body.login-page .container.right-panel-active .overlay {
-  border-radius: 0 100px 100px 0;
-}
 
 body.login-page .overlay-panel {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 0 40px;
-  text-align: center;
-  top: 0;
-  height: 100%;
-  width: 50%;
-  transform: translateX(0);
-  transition: transform 0.6s ease-in-out;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    text-align: center;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
 }
 
+/* Panel "Welcome Back!" (Admin) tersembunyi dulu */
 body.login-page .overlay-left {
-  transform: translateX(-20%);
+    transform: translateX(-20%);
 }
 
+/* Panel "Hello, Friend!" (Vendor) terlihat */
 body.login-page .overlay-right {
-  right: 0;
-  transform: translateX(0);
+    right: 0;
+    transform: translateX(0);
 }
 
+body.login-page .social-container {
+    margin: 20px 0;
+}
+
+body.login-page .social-container a {
+    border: 1px solid #DDDDDD;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    height: 40px;
+    width: 40px;
+}
+
+/* STATE ACTIVE (TAMPILAN DEFAULT KITA) */
 body.login-page .container.right-panel-active .sign-in-container {
-  transform: translateX(100%);
+    transform: translateX(100%);
 }
 
 body.login-page .container.right-panel-active .sign-up-container {
-  transform: translateX(100%);
-  opacity: 1;
-  z-index: 5;
-  animation: login-show 0.6s;
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: login-show 0.6s;
 }
 
 body.login-page .container.right-panel-active .overlay-container {
-  transform: translateX(-100%);
+    transform: translateX(-100%);
 }
 
 body.login-page .container.right-panel-active .overlay {
-  transform: translateX(50%);
+    transform: translateX(50%);
 }
 
 body.login-page .container.right-panel-active .overlay-left {
-  transform: translateX(0);
+    transform: translateX(0);
 }
 
 body.login-page .container.right-panel-active .overlay-right {
-  transform: translateX(20%);
+    transform: translateX(20%);
 }
+
 
 @keyframes login-show {
   0%, 49.99% {
@@ -1684,6 +1705,113 @@ body.login-page .sidebar-toggle {
   display: none;
 }
 
+/* --- LOGO INDAH KIAT (DI ATAS FORM LOGIN) --- */
+.login-page .logo-ik-wrap {
+    position: absolute;
+    top: 50px; 
+    width: 100%;
+    text-align: center;
+    z-index: 10;
+    transition: all 0.6s ease-in-out;
+}
+
+.login-page .sign-up-container .logo-ik-wrap {
+    left: 0;
+}
+.login-page .sign-in-container .logo-ik-wrap {
+    left: 50%;
+}
+
+/* Pindahkan logo Indah Kiat saat transisi panel */
+body.login-page.right-panel-active .sign-up-container .logo-ik-wrap {
+    transform: translateX(0%); 
+}
+body.login-page.right-panel-active .sign-in-container .logo-ik-wrap {
+    transform: translateX(-100%); 
+}
+body.login-page:not(.right-panel-active) .sign-up-container .logo-ik-wrap {
+    transform: translateX(100%); 
+}
+body.login-page:not(.right-panel-active) .sign-in-container .logo-ik-wrap {
+    transform: translateX(0%); 
+}
+
+
+.logo-ik-img {
+    /* MEMPERBESAR LOGO */
+    height: auto;
+    max-width: 200px; 
+    margin-bottom: 5px;
+}
+
+.logo-ik-text {
+    font-weight: bold;
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--ink);
+}
+.logo-ik-tagline {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 20px;
+}
+
+/* --- LOGO BTS (DI TENGAH OVERLAY) --- */
+
+/* Atur ulang panel form agar ada ruang untuk logo IK */
+body.login-page .form-container {
+    padding-top: 100px; 
+}
+body.login-page .form-container form {
+    padding-top: 0;
+    justify-content: flex-start; 
+}
+body.login-page .form-container h1, 
+body.login-page .form-container span {
+    display: none; 
+}
+
+/* Pastikan elemen form tidak terhimpit */
+body.login-page input {
+    margin: 6px 0;
+}
+body.login-page a {
+    margin: 8px 0;
+}
+
+
+.login-page .logo-bts-wrap {
+    /* Posisikan logo BTS di bagian atas overlay */
+    position: absolute;
+    top: 40px; /* Diperkecil agar lebih tinggi */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 280px; /* MEMPERBESAR LOGO */
+    z-index: 10;
+    text-align: center;
+}
+
+.login-page .logo-bts-wrap .logo-bts-img {
+    width: 100%;
+    height: auto;
+    max-width: 280px; /* MEMPERBESAR LOGO */
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)); 
+}
+
+/* Sesuaikan konten overlay agar tidak menimpa logo BTS */
+body.login-page .overlay-panel {
+    justify-content: flex-end; 
+    padding-bottom: 50px;
+}
+body.login-page .overlay-panel h1 {
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+}
+body.login-page .overlay-panel p {
+    margin: 10px 0 20px;
+}
+
 /* === DETAIL PANEL (VENDOR) === */
 #detailPanel .table-wrap {
   overflow-x: auto;
@@ -1696,28 +1824,25 @@ body.login-page .sidebar-toggle {
 #detailPanel .table.rekap th,
 #detailPanel .table.rekap td {
   text-align: center;
-  /* Hapus white-space: nowrap; di sini jika ini adalah sumbernya,
-     atau pastikan hanya kolom yang butuh nowrap yang memilikinya. */
+  white-space: normal; 
   vertical-align: middle;
   padding: 10px 12px;
   font-size: 0.9rem;
   border: 1px solid var(--border);
-  /* REVISI: Hapus nowrap di sel data agar Combo bisa wrap */
-  white-space: normal; 
 }
 
 /* REVISI: Tingkatkan lebar minimum untuk kolom data utama */
 #detailPanel .table.rekap th:nth-child(2),
 #detailPanel .table.rekap td:nth-child(2) {
-  min-width: 200px; /* Diperluas untuk Container No. */
+  min-width: 200px; 
 }
 
 #detailPanel .table.rekap th:nth-child(3),
 #detailPanel .table.rekap td:nth-child(3) {
-  min-width: 200px; /* Diperluas untuk No. Seal */
+  min-width: 200px; 
 }
 
-#detailPanel .table.rekap th:nth-child(4), /* Plat Mobil */
+#detailPanel .table.rekap th:nth-child(4), 
 #detailPanel .table.rekap td:nth-child(4) {
   min-width: 140px; 
 }
@@ -1732,7 +1857,6 @@ body.login-page .sidebar-toggle {
   height: auto;
   box-sizing: border-box;
   text-align: left !important;
-  /* Tambahkan width 100% untuk input biasa */
   width: 100%;
 }
 
@@ -1744,20 +1868,10 @@ body.login-page .sidebar-toggle {
 
 /* Input Tiny hanya untuk kolom yang memang kecil (Plat, Driver, Contact, Depo) */
 #detailPanel .table.rekap td input.tiny {
-    /* Plat Mobil, Nama Driver, Contact, Depo */
     max-width: 100%;
     text-align: center;
 }
 
-/* Input Combo di dalam sel (Agar inputnya terpisah) */
-#detailPanel .table.rekap td .combo-input {
-    width: 100%; /* Gunakan lebar penuh sel */
-    text-align: center;
-    padding: 6px 8px; /* Padding lebih kecil */
-    font-size: 0.85rem;
-    height: auto;
-    margin: 0; /* Hapus margin default input */
-}
 
 /* Hapus styling max-width/height pada input non-tiny (Container/Seal non-combo) */
 #detailPanel .table.rekap td input:not(.tiny),
@@ -1772,7 +1886,7 @@ body.login-page .sidebar-toggle {
 #detailPanel .table.rekap td .input.no-tiny {
   width: 100%;
   min-width: 150px;
-  height: 4.5em; /* Tetap tinggi untuk combo */
+  height: 4.5em; 
   font-size: 0.9rem;
   padding: 8px 10px;
   border-radius: 6px;
@@ -1952,8 +2066,9 @@ body.login-page .sidebar-toggle {
 /* === REKAP TABLE (ORDER TO EMKL) === */
 #rekapTable th,
 #rekapTable td {
-  font-size: 0.8rem;
-  padding: 6px 8px;
+  /* Sudah diatur oleh .table.rekap di atas */
+  /* font-size: 0.8rem;
+  padding: 6px 8px; */
 }
 
 #rekapTable td[rowspan] {
@@ -2049,6 +2164,7 @@ body.login-page .sidebar-toggle {
   .main-header {
     background: #fff !important;
     color: #000 !important;
+    position: relative !important; /* Non-sticky saat print */
   }
   
   .card {
@@ -2080,3 +2196,89 @@ body.login-page .sidebar-toggle {
     min-width: unset !important; /* Hilangkan min-width yang memicu scroll horizontal */
     width: 100%;
 }
+/* === VENDOR ORDERAN INPUT STYLING (FINAL FIX FOR PRECISION) === */
+
+/* Kolom Status (Accept/Reject) - Dibuat sama dan presisi */
+.table.rekap th.acc,
+.table.rekap td.acc,
+.table.rekap th.rej,
+.table.rekap td.rej {
+    /* MENGEKECILKAN LEBAR MINIMAL KOLOM STATUS */
+    min-width: 40px; /* Lebar minimal yang sangat kecil */
+    width: 40px; /* Tambahkan width agar lebih pasti */
+    font-size: 0.7rem; 
+    box-sizing: border-box; 
+    /* Hapus padding ekstra di sel data */
+    padding: 0px !important; 
+}
+
+/* Target: Memastikan input Accept dan display Reject mengisi penuh sel dengan padding seragam */
+#vendorOrderTable .input-accept,
+#vendorOrderTable .reject-display {
+    width: 100%; 
+    max-width: none;
+    box-sizing: border-box;
+    /* Membuat kotak lebih kecil dan padat */
+    padding: 3px 2px !important; 
+    text-align: center;
+    /* Menyempurnakan tinggi untuk input dan div */
+    height: 30px; /* Dikecilkan dari 40px */
+    line-height: 20px; /* Menyesuaikan line-height */
+    margin: 0 !important; /* Hapus margin default input/div */
+    border-radius: 6px; /* Konsistenkan border-radius */
+    font-weight: 700; /* Dibuat lebih tebal agar terlihat jelas */
+    font-size: 0.8rem; /* Naikkan sedikit agar angka '0' terlihat jelas */
+    /* Menghilangkan transisi input yang mengganggu pada input number */
+    transition: none !important; 
+}
+
+#vendorOrderTable .input-accept:focus {
+    outline: none;
+    border-color: #16a34a !important;
+    box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.1);
+}
+
+#vendorOrderTable .input-accept {
+    border: 1px solid #86efac; 
+    background: #dcfce7;
+    color: #15803d;
+}
+
+#vendorOrderTable .input-accept:disabled {
+    background: #f3f4f6;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+#vendorOrderTable .reject-display {
+    border: 1px solid #fca5a5;
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* FINAL FIX: Remove extra spacing in cells - Disesuaikan dengan revisi umum di atas */
+/* Ini harus di bagian paling akhir untuk menimpa semua default */
+#vendorOrderTable td.acc,
+#vendorOrderTable td.rej {
+    padding: 0px !important; 
+}
+
+/* --- REVISI 2: STYLING BARU UNTUK REPORT PERFORMA VENDOR FILTER --- */
+#performance-filter-controls .form-grid {
+    gap: 10px; 
+    align-items: flex-end;
+    margin-bottom: 0;
+}
+#performance-filter-controls .span-3,
+#performance-filter-controls .span-4,
+#performance-filter-controls .span-5 {
+    /* Menggunakan 1fr di bawah 1024px */
+    grid-column: span 4; 
+}
+
+@media (min-width: 1024px) {
+    #performance-filter-controls .span-3 { grid-column: span 3; }
+    #performance-filter-controls .span-4 { grid-column: span 4; }
+    #performance-filter-controls .span-5 { grid-column: span 5; }
+}
+/* --- AKHIR REVISI 2 --- */
